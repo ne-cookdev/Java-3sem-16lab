@@ -96,6 +96,8 @@ public class MainPanel {
         panel_cust.setLayout(new BoxLayout(panel_cust, BoxLayout.Y_AXIS));
         JLabel label_cust = new JLabel("Customer: " + customers[0]);
         JLabel label_addr = new JLabel("Address: " + address);
+        label_cust.setFont(new Font("Calibri", Font.PLAIN, 15));
+        label_addr.setFont(new Font("Calibri", Font.PLAIN, 15));
         panel_cust.add(label_cust);
         panel_cust.add(label_addr);
 
@@ -117,8 +119,8 @@ public class MainPanel {
         JPanel Btpanel = new JPanel();
         JButton button5 = new JButton("Yes");
         JButton button6 = new JButton("No");
-        button5.setPreferredSize(new Dimension(100, 50));
-        button6.setPreferredSize(new Dimension(100, 50));
+        button5.setPreferredSize(new Dimension(100, 40));
+        button6.setPreferredSize(new Dimension(100, 40));
         Btpanel.add(button5);
         Btpanel.add(button6);
         panel3.add(label2);
@@ -126,14 +128,13 @@ public class MainPanel {
         panel3.setVisible(false);
 
         JPanel panel4 = new JPanel(new BorderLayout());
-        JLabel label3 = new JLabel(
-                "In our restaurant, you can taste exquisite dishes from different countries around the world. Our chefs have many years of experience.");
+        JLabel label3 = new JLabel("Restaurant Online Menu");
         label3.setHorizontalAlignment(SwingConstants.CENTER);
         label3.setFont(new Font("Calibri", Font.BOLD, 20));
         JPanel pn1 = new JPanel();
         pn1.add(label3);
         JButton button7 = new JButton("Back");
-        button7.setPreferredSize(new Dimension(100, 50));
+        button7.setPreferredSize(new Dimension(70, 25));
         JPanel pn2 = new JPanel();
         pn2.add(button7);
         String[] columnNames = { "Name", "Description", "Price" };
@@ -159,7 +160,8 @@ public class MainPanel {
         panel4.setVisible(false);
 
         JPanel panel5 = new JPanel(new BorderLayout());
-        JLabel label4 = new JLabel("Menu consists of 15 Items from around the world.");
+        JLabel label4 = new JLabel("Restaurant Online Menu");
+        label4.setHorizontalAlignment(SwingConstants.CENTER);
         label4.setFont(new Font("Calibri", Font.BOLD, 20));
         label4.setOpaque(true);
         label4.setBackground(Color.WHITE);
@@ -194,7 +196,7 @@ public class MainPanel {
         JLabel label5 = new JLabel("Cart is Empty");
         emptyPanel.add(label5);
         emptyPanel.setVisible(false);
-        label5.setFont(new Font("Calibri", Font.BOLD, 30));
+        label5.setFont(new Font("Calibri", Font.PLAIN, 30));
         JPanel backpanel1 = new JPanel(new FlowLayout());
         JButton backbutton1 = new JButton("Back");
         JButton button8 = new JButton("Pay for the Order");
@@ -329,7 +331,12 @@ public class MainPanel {
                     try {
                         internetOrderManager.addOrder(customers[0], internetOrder);
                     } catch (Exception ex) {
-                        throw new RuntimeException(ex);
+                        internetOrderManager.removeOrder(customers[0]);
+                        try {
+                            internetOrderManager.addOrder(customers[0], internetOrder);
+                        } catch (Exception exc) {
+                            throw new RuntimeException(exc);
+                        }
                     }
                 }
             }
@@ -365,12 +372,12 @@ public class MainPanel {
                 JPanel mainPN = new JPanel();
                 JPanel mainPanel1 = new JPanel(new BorderLayout());
                 JLabel label1 = new JLabel("Total Price: $" + internetOrder.getTotalPrice());
-                label1.setFont(new Font("Calibri", Font.ITALIC, 30));
+                label1.setFont(new Font("Calibri", Font.PLAIN, 30));
                 JPanel panel1 = new JPanel(new FlowLayout());
                 JButton button1 = new JButton("Pay");
                 JButton button2 = new JButton("Close");
-                button1.setPreferredSize(new Dimension(150, 75));
-                button2.setPreferredSize(new Dimension(150, 75));
+                button1.setPreferredSize(new Dimension(150, 40));
+                button2.setPreferredSize(new Dimension(150, 40));
 
                 JPanel panel2 = new JPanel();
                 JLabel label3 = new JLabel();
@@ -382,7 +389,7 @@ public class MainPanel {
                     mainPanel1.setVisible(false);
                     panel2.setVisible(true);
                 }
-                label3.setFont(new Font("Calibri", Font.BOLD, 30));
+                label3.setFont(new Font("Calibri", Font.PLAIN, 30));
                 button1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -430,7 +437,7 @@ public class MainPanel {
                 JPanel mainpanel2 = new JPanel(new FlowLayout());
                 JLabel label1 = new JLabel("Order Deleted");
                 label1.setText((internetOrder == null) ? "The Order is not formed" : "Successfully Deleted");
-                label1.setFont(new Font("Calibri", Font.BOLD, 20));
+                label1.setFont(new Font("Calibri", Font.PLAIN, 25));
                 DefaultTableModel model1 = (DefaultTableModel) table2.getModel();
                 model1.setRowCount(0);
                 internetOrder = null;
@@ -475,7 +482,7 @@ public class MainPanel {
 
                 JPanel panel1 = new JPanel();
                 JLabel label1 = new JLabel("Insert Password: ");
-                label1.setFont(new Font("Arial Black", Font.BOLD, 40));
+                label1.setFont(new Font("Arial Black", Font.PLAIN, 40));
                 panel1.add(label1);
 
                 JPanel panel2 = new JPanel();
@@ -497,14 +504,14 @@ public class MainPanel {
                 JPanel panel6 = new JPanel();
                 JPanel panel7 = new JPanel();
                 JLabel label2 = new JLabel("Manager Catalog");
-                label2.setFont(new Font("Bahnschrift", Font.BOLD, 30));
+                label2.setFont(new Font("Calibri", Font.BOLD, 30));
                 JButton button2 = new JButton("<html>Amount of<br>online orders</html>");
                 JButton button3 = new JButton("<html>Total amount of<br>online orders</html>");
-                JButton button4 = new JButton("<html>Show<br>all online orders</html>");
+                JButton button4 = new JButton("<html>Show online<br>orders in queue</html>");
                 JButton button5 = new JButton("<html>Delete all<br>online orders</html>");
                 JButton button6 = new JButton("<html>Add new<br>restaurant order</html>");
                 JButton button7 = new JButton("<html>Amount of<br>restaurant orders</html>");
-                JButton button8 = new JButton("<html>Total amount of<br>restaurant orders</html>");
+                JButton button8 = new JButton("<html>Total price of<br>restaurant orders</html>");
                 JButton button9 = new JButton("<html>Delete all<br>restaurant orders</html>");
                 button2.setPreferredSize(new Dimension(150, 50));
                 button3.setPreferredSize(new Dimension(150, 50));
@@ -548,7 +555,7 @@ public class MainPanel {
                 JPanel panel_1 = new JPanel();
                 panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
                 JLabel label_1 = new JLabel();
-                label_1.setFont(new Font("Calibri", Font.BOLD, 30));
+                label_1.setFont(new Font("Calibri", Font.PLAIN, 30));
                 JButton button_1 = new JButton("Back");
                 panel_1.add(label_1);
                 panel_1.add(button_1);
@@ -557,7 +564,7 @@ public class MainPanel {
                 JPanel panel_2 = new JPanel();
                 panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
                 JLabel label_2 = new JLabel();
-                label_2.setFont(new Font("Calibri", Font.BOLD, 30));
+                label_2.setFont(new Font("Calibri", Font.PLAIN, 30));
                 JButton button_2 = new JButton("Back");
                 panel_2.add(label_2);
                 panel_2.add(button_2);
@@ -566,7 +573,7 @@ public class MainPanel {
                 JPanel panel_3 = new JPanel(new BorderLayout());
                 JLabel label_3 = new JLabel();
                 label_3.setHorizontalAlignment(SwingConstants.CENTER);
-                label_3.setFont(new Font("Calibri", Font.BOLD, 30));
+                label_3.setFont(new Font("Calibri", Font.PLAIN, 30));
                 JButton button_3 = new JButton("Back");
                 String[] columnNames_1 = {"Customer", "Order"};
                 String[][] orders_table = new String[customers.length][2];
@@ -574,7 +581,11 @@ public class MainPanel {
                     if (customers[i] != null){
                         orders_table[i][0] = customers[i].getFirstName() + " " + customers[i].getSecondName();
                         if (internetOrderManager.InternetOrdersAmount() != 0) {
-                            orders_table[i][1] = internetOrderManager.getOrder(customers[i]).showItems();
+                            if(internetOrder != null) {
+                                if (internetOrder.getOrderCount() != 0) {
+                                    orders_table[i][1] = internetOrderManager.getOrder(customers[i]).showItems();
+                                }
+                            }
                         }
                         else{
                             orders_table[i][1] = "";
@@ -662,7 +673,7 @@ public class MainPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JFrame fr = new JFrame("Deletion Of Orders");
-                        fr.setSize(450, 270);
+                        fr.setSize(400, 270);
                         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                         int centerX = (int) (screenSize.getWidth() - fr.getWidth()) / 2;
                         int centerY = (int) (screenSize.getHeight() - fr.getHeight()) / 2;
@@ -671,14 +682,14 @@ public class MainPanel {
 
                         JPanel pn1 = new JPanel(new FlowLayout());
                         JLabel lb1 = new JLabel("Are you sure?");
-                        lb1.setFont(new Font("Calibri", Font.BOLD, 30));
+                        lb1.setFont(new Font("Calibri", Font.PLAIN, 30));
                         JLabel lb2 = new JLabel();
-                        lb2.setFont(new Font("Calibri", Font.BOLD, 30));
+                        lb2.setFont(new Font("Calibri", Font.PLAIN, 30));
                         JPanel pn2 = new JPanel();
                         JButton bt1 = new JButton("Yes");
-                        bt1.setPreferredSize(new Dimension(125, 40));
+                        bt1.setPreferredSize(new Dimension(100, 40));
                         JButton bt2 = new JButton("No");
-                        bt2.setPreferredSize(new Dimension(125, 40));
+                        bt2.setPreferredSize(new Dimension(100, 40));
                         pn1.add(lb1);
                         pn1.add(lb2);
                         pn2.add(bt1);
@@ -727,12 +738,14 @@ public class MainPanel {
                 });
 
                 JPanel panel_6 = new JPanel(new BorderLayout());
-                JLabel label_6 = new JLabel("Menu consists of 15 Items from around the world.");
+                JLabel label_6 = new JLabel("Restaurant Online Menu");
                 label_6.setFont(new Font("Calibri", Font.BOLD, 20));
+                label_6.setHorizontalAlignment(SwingConstants.CENTER);
                 JPanel addpanel_6 = new JPanel();
                 JButton addbutton_6 = new JButton("Add an item");
                 JButton backbutton_6 = new JButton("Back");
                 JLabel label_62 = new JLabel("Choose table: ");
+                label_62.setFont(new Font("Calibri", Font.PLAIN, 15));
 
                 String[][] tables = new String[10][1];
                 for (int i = 0; i < tables.length; i++) tables[i][0] = String.valueOf(i);
@@ -755,6 +768,7 @@ public class MainPanel {
                 scrollPane_62.setPreferredSize(new Dimension(100, 40));
                 JButton addbutton_62 = new JButton("Create");
                 JLabel label_63 = new JLabel();
+                label_63.setFont(new Font("Calibri", Font.PLAIN, 15));
                 addpanel_6.add(addbutton_6);
                 addpanel_6.add(backbutton_6);
                 addpanel_6.add(label_62);
@@ -844,7 +858,7 @@ public class MainPanel {
                 JPanel panel_7 = new JPanel();
                 panel_7.setLayout(new BoxLayout(panel_7, BoxLayout.Y_AXIS));
                 JLabel label_7 = new JLabel();
-                label_7.setFont(new Font("Calibri", Font.BOLD, 30));
+                label_7.setFont(new Font("Calibri", Font.PLAIN, 30));
                 JButton button_7 = new JButton("Back");
                 panel_7.add(label_7);
                 panel_7.add(button_7);
@@ -879,7 +893,7 @@ public class MainPanel {
                 JPanel panel_8 = new JPanel();
                 panel_8.setLayout(new BoxLayout(panel_8, BoxLayout.Y_AXIS));
                 JLabel label_8 = new JLabel();
-                label_8.setFont(new Font("Calibri", Font.BOLD, 30));
+                label_8.setFont(new Font("Calibri", Font.PLAIN, 30));
                 JButton button_8 = new JButton("Back");
                 panel_8.add(label_8);
                 panel_8.add(button_8);
@@ -916,7 +930,7 @@ public class MainPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JFrame fr = new JFrame("Deletion Of Orders");
-                        fr.setSize(450, 270);
+                        fr.setSize(400, 270);
                         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                         int centerX = (int) (screenSize.getWidth() - fr.getWidth()) / 2;
                         int centerY = (int) (screenSize.getHeight() - fr.getHeight()) / 2;
@@ -925,14 +939,14 @@ public class MainPanel {
 
                         JPanel pn1 = new JPanel(new FlowLayout());
                         JLabel lb1 = new JLabel("Are you sure?");
-                        lb1.setFont(new Font("Calibri", Font.BOLD, 30));
+                        lb1.setFont(new Font("Calibri", Font.PLAIN, 30));
                         JLabel lb2 = new JLabel();
-                        lb2.setFont(new Font("Calibri", Font.BOLD, 30));
+                        lb2.setFont(new Font("Calibri", Font.PLAIN, 30));
                         JPanel pn2 = new JPanel();
                         JButton bt1 = new JButton("Yes");
-                        bt1.setPreferredSize(new Dimension(125, 40));
+                        bt1.setPreferredSize(new Dimension(100, 40));
                         JButton bt2 = new JButton("No");
-                        bt2.setPreferredSize(new Dimension(125, 40));
+                        bt2.setPreferredSize(new Dimension(100, 40));
                         pn1.add(lb1);
                         pn1.add(lb2);
                         pn2.add(bt1);
